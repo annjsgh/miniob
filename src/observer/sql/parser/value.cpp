@@ -379,10 +379,10 @@ bool is_leap_year(int year)
 
 bool is_date_legal(int date)
 {
-  if(date>20380228||date<19700101)
-  {
-    return false;
-  }
+  // if(date>20380228||date<19700101)
+  // {
+  //   return false;
+  // }
   int year=date/10000;
   int month=(date-year*10000)/100;
   int day=date-year*10000-month*100;

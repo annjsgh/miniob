@@ -132,8 +132,9 @@ RC AggregatePhysicalOperator::next()
           result_cells[cell_idx].set_int(result_cells[cell_idx].get_int()+1);
           break;
         case AggrOp::AGGR_COUNT_ALL:
-          count_all++;
-          count_all_flag=true;
+          result_cells[cell_idx].set_int(result_cells[cell_idx].get_int()+1);
+          // count_all++;
+          // count_all_flag=true;
           break;
         case AggrOp::AGGR_AVG:
           rc = tuple->cell_at(cell_idx, cell);
@@ -159,14 +160,14 @@ RC AggregatePhysicalOperator::next()
     avg_place.pop_back();
   }
 
-  if(count_all_flag){
-    while(!result_cells.empty())
-    {
-      result_cells.pop_back();
-    }
-    result_cells.push_back(temp);
-    result_cells[0].set_int(count_all);
-  }
+  // if(count_all_flag){
+  //   while(!result_cells.empty())
+  //   {
+  //     result_cells.pop_back();
+  //   }
+  //   result_cells.push_back(temp);
+  //   result_cells[0].set_int(count_all);
+  // }
 
   result_tuple_.set_cells(result_cells);
   

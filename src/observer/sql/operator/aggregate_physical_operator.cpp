@@ -83,6 +83,16 @@ RC AggregatePhysicalOperator::next()
              result_cells[cell_idx].set_string(cell.get_string().c_str());
             }
           }
+          else if(attr_type==AttrType::DATES)
+          {
+            if(firstmax)
+            {
+              result_cells[cell_idx].set_date(cell.get_date());
+            }
+            if(result_cells[cell_idx].get_date()<cell.get_date()){
+             result_cells[cell_idx].set_date(cell.get_date());
+            }
+          }
           break;
         case AggrOp::AGGR_MIN:
           rc = tuple->cell_at(cell_idx, cell);
@@ -105,6 +115,16 @@ RC AggregatePhysicalOperator::next()
             }
             if(result_cells[cell_idx].get_string()>cell.get_string()){
              result_cells[cell_idx].set_string(cell.get_string().c_str());
+            }
+          }
+          else if(attr_type==AttrType::DATES)
+          {
+            if(firstmax)
+            {
+              result_cells[cell_idx].set_date(cell.get_date());
+            }
+            if(result_cells[cell_idx].get_date()>cell.get_date()){
+             result_cells[cell_idx].set_date(cell.get_date());
             }
           }
           break;

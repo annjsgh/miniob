@@ -179,6 +179,9 @@ public:
    *
    * @param rid 要删除的记录标识
    */
+
+  RC update_record(RID *rid, int offset, int len, Value &value);
+
   RC delete_record(const RID *rid);
 
   /**
@@ -294,6 +297,9 @@ public:
    * @note rec 参数返回的记录并不会复制数据内存。page_handler 对象会拿着相关的资源，比如 pin 住页面和加上页面锁。
    *       如果page_handler 释放了，那也不能再访问rec对象了。
    */
+
+  RC update_record(RID *rid, int offset, int len, Value &value);
+
   RC get_record(RecordPageHandler &page_handler, const RID *rid, bool readonly, Record *rec);
 
   /**

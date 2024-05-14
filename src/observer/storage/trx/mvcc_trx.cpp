@@ -219,6 +219,8 @@ RC MvccTrx::visit_record(Table *table, Record &record, bool readonly)
   return rc;
 }
 
+RC MvccTrx::update_record(Table *table, Record &record, int offset, int len, Value &value){}
+
 /**
  * @brief 获取指定表上的事务使用的字段
  * 

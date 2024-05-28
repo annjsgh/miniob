@@ -64,4 +64,12 @@ int compare_date(void* arg1, void* arg2){
   return compare_int(arg1, arg2);
 }
 
+int compare_str_with_int(void *arg1, int arg1_max_length, void *arg2) {
+  
+}
+
+int compare_str_with_float(void *arg1, int arg1_max_length, void *arg2) {
+
+}
+
 } // namespace common

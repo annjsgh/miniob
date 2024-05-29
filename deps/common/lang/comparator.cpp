@@ -68,7 +68,9 @@ int compare_str_with_int(void *arg1, int arg1_max_length, void *arg2) {
   int temp2 = *(int *)arg2;
   const char* str2 = (std::to_string(temp2)).c_str();
   int ans = compare_string(arg1, arg1_max_length, (void*)str2, (std::to_string(temp2)).size());
-  ans=0-ans;
+  if (str2[0]>'9'||str2[0]<'0'){
+    ans=0-ans;
+  }
   return ans;
 }
 
@@ -76,7 +78,9 @@ int compare_str_with_float(void *arg1, int arg1_max_length, void *arg2) {
   float temp2 = *(float *)arg2;
   const char* str2 = (std::to_string(temp2)).c_str();
   int ans = compare_string(arg1, arg1_max_length, (void*)str2, std::to_string(temp2).size());
-  ans=0-ans;
+  if (str2[0]>'9'||str2[0]<'0'){
+    ans=0-ans;
+  }
   return ans;
 }
 

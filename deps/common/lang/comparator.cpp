@@ -66,25 +66,35 @@ int compare_date(void* arg1, void* arg2){
 
 int compare_str_with_int(void *arg1, int arg1_max_length, void *arg2) {
   int temp2 = *(int *)arg2;
-  const char* str2 = (std::to_string(temp2)).c_str();
-  int ans = compare_string(arg1, arg1_max_length, (void*)str2, (std::to_string(temp2)).size());
-  if (str2[0]>'9'||str2[0]<'0'){
-    ans=0-ans;
+  const char *s1 = (const char *)arg1;
+  if (s1[0]>'9'||s1[0]<'0'){ //start with invalid char , set zero
+    return (0-temp2);
+  }else { // start with number
+    int temp1=0.0;
+    int place=1;
+    for(int a=0;a<arg1_max_length;a++){
+      if (s1[a]<='9'&& s1[a]>='0'){
+        float temp =s1[a]-'0';
+          temp1*=place;
+          temp1+=temp;
+      }else{
+        break;
+      }
+      place*=10;
+    }
+    return temp1-temp2;
   }
-  return ans;
 }
 
 int compare_str_with_float(void *arg1, int arg1_max_length, void *arg2) {
   float temp2 = *(float *)arg2;
-  const char* str2 = (std::to_string(temp2)).c_str();
-  int ans = compare_string(arg1, arg1_max_length, (void*)str2, std::to_string(temp2).size());
-  if (str2[0]>'9'||str2[0]<'0'){
-    ans=0-ans;
-  }else{
+  const char *s1 = (const char *)arg1;
+  if (s1[0]>'9'||s1[0]<'0'){ //start with invalid char , set zero
+    return (0.0-temp2);
+  }else{ // start with number
     float temp1=0.0;
     float place=1.0;
     bool flag=true;
-    const char *s1 = (const char *)arg1;
     for(int a=0;a<arg1_max_length;a++){
       if (s1[a]<='9'&& s1[a]>='0'){
         float temp =s1[a]-'0';
@@ -116,7 +126,6 @@ int compare_str_with_float(void *arg1, int arg1_max_length, void *arg2) {
   }
   return 0;
   }
-  return ans;
 }
 
-} // namespace common
+ }// namespace common

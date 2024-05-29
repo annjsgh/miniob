@@ -80,6 +80,41 @@ int compare_str_with_float(void *arg1, int arg1_max_length, void *arg2) {
   int ans = compare_string(arg1, arg1_max_length, (void*)str2, std::to_string(temp2).size());
   if (str2[0]>'9'||str2[0]<'0'){
     ans=0-ans;
+  }else{
+    float temp1=0.0;
+    float place=1.0;
+    bool flag=true;
+    const char *s1 = (const char *)arg1;
+    for(int a=0;a<arg1_max_length;a++){
+      if (s1[a]<='9'&& s1[a]>='0'){
+        float temp =s1[a]-'0';
+        if(flag){
+          temp1*=place;
+          temp1+=temp;
+        }else{
+          temp*=place;
+          temp1+=temp;
+        }
+      }else if(s1[a]=='.'){
+        place=1;
+        flag=false;
+      }else{
+        break;
+      }
+      if(flag){
+        place*=10.0;
+      }else{
+        place*=0.1;
+      }
+    }
+    float cmp = temp1 - temp2;
+  if (cmp > EPSILON) {
+    return 1;
+  }
+  if (cmp < -EPSILON) {
+    return -1;
+  }
+  return 0;
   }
   return ans;
 }
